@@ -12,7 +12,7 @@ def test_create_product() -> None:
         "serial_number": "123456",
         "storage_instructions": "Manter em local seco e arejado.",
     }
-    # **params expande o dicionário params em argumentos nomeados
+    # **params expande(desempacota) o dicionário params em argumentos nomeados
     instance_product = Product(**params)
     assert instance_product.id == "1"
     assert instance_product.product_name == "Arroz"
