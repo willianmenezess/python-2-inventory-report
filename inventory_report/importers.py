@@ -24,7 +24,7 @@ class JsonImporter(Importer):
         return list_products
 
 
-class CsvImporter:
+class CsvImporter(Importer):
     pass
 
 
