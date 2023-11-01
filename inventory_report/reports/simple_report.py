@@ -16,7 +16,7 @@ class SimpleReport(Report):
             f'Oldest manufacturing date: {self.get_oldest_manufacturing()}\n'
             f'Closest expiration date: {self.get_closest_expiration_date()}\n'
             f'Company with the largest inventory:'
-            f' {self.get_company_larg_inventory().upper()}'
+            f' {self.get_company_larg_inventory()}'
         )
 
     def get_oldest_manufacturing(self) -> str:
