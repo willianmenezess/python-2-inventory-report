@@ -1,3 +1,4 @@
+from csv import DictReader
 from typing import Dict, Type
 from abc import ABC, abstractmethod
 from inventory_report.product import Product
@@ -25,7 +26,14 @@ class JsonImporter(Importer):
 
 
 class CsvImporter(Importer):
-    pass
+    def import_data(self) -> list[Product]:
+        list_products: list[Product] = []
+        with open(self.path) as file:
+            csv_data = DictReader(file)
+            for row in csv_data:
+                # **params desempacota o dict row(product) em argum. nomeados
+                list_products.append(Product(**row))
+        return list_products
 
 
 # Não altere a variável abaixo
@@ -38,5 +46,8 @@ IMPORTERS: Dict[str, Type[Importer]] = {
 
 if __name__ == "__main__":
     path = "inventory_report/data/inventory.json"
-    instance_json_importer = JsonImporter(path)
-    print(instance_json_importer.import_data())
+    # instance_json_importer = JsonImporter(path)
+    # print(instance_json_importer.import_data())
+    path2 = "inventory_report/data/inventory.csv"
+    instance_csv_importer = CsvImporter(path2)
+    print(instance_csv_importer.import_data())
