@@ -19,11 +19,15 @@ class SimpleReport(Report):
             f' {self.get_company_larg_inventory()}'
         )
 
-    def get_oldest_manufacturing(self) -> str:
+    def get_all_products(self) -> list[Product]:
         all_products: list[Product] = []
         for inventory in self.inventorys:
             for product in inventory.data:
                 all_products.append(product)
+        return all_products
+
+    def get_oldest_manufacturing(self) -> str:
+        all_products = self.get_all_products()
         oldest_manufacturing = sorted(
             all_products,
             key=lambda x: x.manufacturing_date)[0].manufacturing_date
@@ -31,10 +35,7 @@ class SimpleReport(Report):
 
     def get_closest_expiration_date(self) -> str:
         today = date.today()
-        all_products: list[Product] = []
-        for inventory in self.inventorys:
-            for product in inventory.data:
-                all_products.append(product)
+        all_products = self.get_all_products()
         filter_all_products = [
             product for product in all_products
             if datetime.strptime(
@@ -45,13 +46,13 @@ class SimpleReport(Report):
         return closest_expiration_date
 
     def get_company_larg_inventory(self) -> str:
-        all_products: list[str] = []
-        for inventory in self.inventorys:
-            for product in inventory.data:
-                all_products.append(product.company_name)
+        all_companys: list[str] = []
+        all_products = self.get_all_products()
+        for product in all_products:
+            all_companys.append(product.company_name)
         company_largest_inventory = max(
-            all_products,
-            key=all_products.count)
+            all_companys,
+            key=all_companys.count)
         return company_largest_inventory
 
 
