@@ -18,11 +18,11 @@ class CompleteReport(SimpleReport):
                 stocked_by_company[product.company_name] += 1
             else:
                 stocked_by_company[product.company_name] = 1
+        # transforma o dicionário em uma lista de tuplas e ordena pelo nome
         sorted_stocked_by_company = sorted(
             stocked_by_company.items(),
-            key=lambda x: x[0],
+            key=lambda x: x[1],
             reverse=True)
-        print(sorted_stocked_by_company)
         result_string = 'Stocked products by company:\n'
         for company, quantity in sorted_stocked_by_company:
             result_string += f'- {company}: {quantity}\n'
