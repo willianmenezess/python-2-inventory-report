@@ -218,9 +218,6 @@ docker-compose run --rm inventory pytest
 
 > **Crie o teste em:** `tests/product/test_product.py`
 
-<p align="center">
-    <img src="/.images/construtor.png " alt="Imagem de construtor em Python"  width="600"/>
-</p>
 
 <details>
 
